@@ -81,7 +81,8 @@ abstract class AbstractAPI
                     return $handler($request, $options);
                 }
                 $token = $this->accessToken->getToken();
-                $request = $request->withHeader('Authorization', 'Bearer ' . $token[AccessToken::TOKEN_KEY]);
+                $request = $request->withHeader('Authorization', 'Bearer '.$token[AccessToken::TOKEN_KEY]);
+
                 return $handler($request, $options);
             };
         };
@@ -95,8 +96,8 @@ abstract class AbstractAPI
     protected function logMiddleware()
     {
         return Middleware::tap(function (RequestInterface $request, $options) {
-            Log::debug("Request: {$request->getMethod()} {$request->getUri()} " . json_encode($options));
-            Log::debug('Request headers:' . json_encode($request->getHeaders()));
+            Log::debug("Request: {$request->getMethod()} {$request->getUri()} ".json_encode($options));
+            Log::debug('Request headers:'.json_encode($request->getHeaders()));
         });
     }
 
@@ -104,7 +105,7 @@ abstract class AbstractAPI
      * Parse JSON from response and check error.
      *
      * @param string $method
-     * @param array $args
+     * @param array  $args
      *
      * @return Collection
      */
@@ -120,7 +121,7 @@ abstract class AbstractAPI
                 $contents = ['code' => -1, 'msg' => $content];
             }
         }
+
         return new Collection($contents);
     }
-
 }

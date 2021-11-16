@@ -1,4 +1,5 @@
 <?php
+
 namespace EasyFeishu\Foundation;
 
 use EasyFeishu\Core\Http;
@@ -13,9 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class Application.
  *
- * @property \EasyFeishu\Contact\Contact $contact
+ * @property \EasyFeishu\Contact\Contact         $contact
  * @property \EasyFeishu\AccessToken\AccessToken $access_token
- * @property \EasyFeishu\Im\Im $im
+ * @property \EasyFeishu\Im\Im                   $im
  */
 class Application extends Container
 {
@@ -68,20 +69,24 @@ class Application extends Container
 
         if (!$this['config']['debug'] || defined('PHPUNIT_RUNNING')) {
             $logFile = $this['config']['log.file'];
-            $logger->pushHandler(new StreamHandler(
-                    $logFile,
-                    $this['config']->get('log.level', Logger::WARNING),
-                    true,
-                    $this['config']->get('log.permission', null))
+            $logger->pushHandler(
+                new StreamHandler(
+                $logFile,
+                $this['config']->get('log.level', Logger::WARNING),
+                true,
+                $this['config']->get('log.permission', null)
+            )
             );
         } elseif ($this['config']['log.handler'] instanceof HandlerInterface) {
             $logger->pushHandler($this['config']['log.handler']);
         } elseif ($logFile = $this['config']['log.file']) {
-            $logger->pushHandler(new StreamHandler(
-                    $logFile,
-                    $this['config']->get('log.level', Logger::WARNING),
-                    true,
-                    $this['config']->get('log.permission', null))
+            $logger->pushHandler(
+                new StreamHandler(
+                $logFile,
+                $this['config']->get('log.level', Logger::WARNING),
+                true,
+                $this['config']->get('log.permission', null)
+            )
             );
         }
         Log::setLogger($logger);
@@ -140,7 +145,7 @@ class Application extends Container
      * Magic set access.
      *
      * @param string $id
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function __set($id, $value)
     {
