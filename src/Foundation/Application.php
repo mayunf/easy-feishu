@@ -15,12 +15,14 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @property \EasyFeishu\Contact\Contact $contact
  * @property \EasyFeishu\AccessToken\AccessToken $access_token
+ * @property \EasyFeishu\Im\Im $im
  */
 class Application extends Container
 {
     protected $providers = [
         ServiceProviders\AccessTokenServiceProvider::class,
         ServiceProviders\ContactServiceProvider::class,
+        ServiceProviders\ImServiceProvider::class,
     ];
 
     public function __construct($config)
