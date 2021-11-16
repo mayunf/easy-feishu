@@ -1,6 +1,2 @@
-preset: symfony
-
-enabled:
-  - strict
-  - strict_param
-  - ordered_use
+php:
+  preset: symfony
