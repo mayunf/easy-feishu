@@ -1,4 +1,5 @@
 <?php
+
 namespace EasyFeishu\Foundation\ServiceProviders;
 
 use EasyFeishu\AccessToken\AccessToken;

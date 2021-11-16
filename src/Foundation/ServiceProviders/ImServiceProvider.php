@@ -1,7 +1,7 @@
 <?php
+
 namespace EasyFeishu\Foundation\ServiceProviders;
 
-use EasyFeishu\Contact\Contact;
 use EasyFeishu\Im\Im;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

@@ -6,7 +6,6 @@ use EasyFeishu\Core\Exceptions\HttpException;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\HandlerStack;
 use Mayunfeng\Supports\Log;
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class Http
@@ -39,7 +38,7 @@ class Http
     protected static $defaults = [
         'curl' => [
             CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
-        ]
+        ],
     ];
 
     /**
@@ -64,10 +63,13 @@ class Http
 
     /**
      * GET request.
+     *
      * @param string $url
-     * @param array $options
-     * @return ResponseInterface
+     * @param array  $options
+     *
      * @throws HttpException
+     *
+     * @return ResponseInterface
      */
     public function get($url, array $options = [])
     {
@@ -170,11 +172,11 @@ class Http
      *
      * @param string $url
      * @param string $method
-     * @param array $options
+     * @param array  $options
      *
-     * @return ResponseInterface
      * @throws HttpException
      *
+     * @return ResponseInterface
      */
     public function request($url, $method = 'GET', $options = [])
     {
@@ -184,20 +186,21 @@ class Http
         $options['handler'] = $this->getHandler();
         $response = $this->getClient()->request($method, $url, $options);
         Log::debug('API 响应:', [
-            'Status' => $response->getStatusCode(),
-            'Reason' => $response->getReasonPhrase(),
+            'Status'  => $response->getStatusCode(),
+            'Reason'  => $response->getReasonPhrase(),
             'Headers' => $response->getHeaders(),
-            'Body' => strval($response->getBody()),
+            'Body'    => strval($response->getBody()),
         ]);
+
         return $response;
     }
 
     /**
      * @param \Psr\Http\Message\ResponseInterface|string $body
      *
-     * @return mixed
      * @throws HttpException
      *
+     * @return mixed
      */
     public function parseJSON($body)
     {
@@ -209,8 +212,9 @@ class Http
         }
         $contents = json_decode($body, true);
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new HttpException('Failed to parse JSON: ' . json_last_error_msg());
+            throw new HttpException('Failed to parse JSON: '.json_last_error_msg());
         }
+
         return $contents;
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace EasyFeishu\Core;
 
 use Exception as BaseException;

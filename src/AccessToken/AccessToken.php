@@ -38,8 +38,10 @@ class AccessToken
 
     /**
      * 获取token.
-     * @return array 返回数组
+     *
      * @throws HttpException
+     *
+     * @return array 返回数组
      */
     public function getToken(): array
     {
@@ -49,7 +51,7 @@ class AccessToken
             return $cache->get($cacheKey);
         }
         $token = $this->requestToken([
-            'app_id' => $this->app['config']['app_id'],
+            'app_id'     => $this->app['config']['app_id'],
             'app_secret' => $this->app['config']['app_secret'],
         ]);
         $this->setToken($token);
@@ -66,14 +68,15 @@ class AccessToken
      */
     public function setToken($token)
     {
-        $cacheKey = $this->cachePrefix . $this->app['config']['app_id'];
+        $cacheKey = $this->cachePrefix.$this->app['config']['app_id'];
         $this->getCache()->set($cacheKey, $token[self::TOKEN_KEY], $token['expire'] - 60);
+
         return $this;
     }
 
     public function removeToken()
     {
-        $this->getCache()->delete($this->cachePrefix . $this->app['config']['app_id']);
+        $this->getCache()->delete($this->cachePrefix.$this->app['config']['app_id']);
     }
 
     public function requestToken(array $arguments): array
@@ -81,7 +84,7 @@ class AccessToken
         $response = $this->sendRequest($arguments);
 
         if (empty($response[self::TOKEN_KEY])) {
-            throw new HttpException('Request access_token fail:' . json_encode($response, JSON_UNESCAPED_UNICODE));
+            throw new HttpException('Request access_token fail:'.json_encode($response, JSON_UNESCAPED_UNICODE));
         }
 
         return $response;
