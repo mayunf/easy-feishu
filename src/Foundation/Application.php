@@ -14,9 +14,11 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class Application.
  *
- * @property \EasyFeishu\Contact\Contact         $contact
- * @property \EasyFeishu\AccessToken\AccessToken $access_token
- * @property \EasyFeishu\Im\Im                   $im
+ * @property \EasyFeishu\AccessToken\AccessToken            $access_token
+ * @property \Mayunfeng\Supports\Config                     $config
+ * @property \EasyFeishu\Contact\Contact                    $contact
+ * @property \EasyFeishu\Im\Im                              $im
+ * @property \Symfony\Component\HttpFoundation\Request      $request
  */
 class Application extends Container
 {
