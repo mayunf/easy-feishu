@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
  * @property \EasyFeishu\Contact\Contact         $contact
  * @property \EasyFeishu\AccessToken\AccessToken $access_token
  * @property \EasyFeishu\Im\Im                   $im
+ * @property \EasyFeishu\calendar\calendar       $calendar
+ * @property \EasyFeishu\calendar\schedule $schedule
  */
 class Application extends Container
 {
@@ -24,6 +26,8 @@ class Application extends Container
         ServiceProviders\AccessTokenServiceProvider::class,
         ServiceProviders\ContactServiceProvider::class,
         ServiceProviders\ImServiceProvider::class,
+        ServiceProviders\CalendarServiceProvider::class,
+        ServiceProviders\ScheduleServiceProvider::class,
     ];
 
     public function __construct($config)

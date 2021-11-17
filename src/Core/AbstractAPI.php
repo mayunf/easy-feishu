@@ -19,6 +19,7 @@ abstract class AbstractAPI
 
     const GET = 'get';
 
+
     public $accessToken;
 
     /** @var Http */

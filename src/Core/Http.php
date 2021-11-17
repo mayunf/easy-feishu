@@ -78,11 +78,15 @@ class Http
 
     public function post($url, $options = [])
     {
+        if (empty($options)) {
+            return $this->request($url, 'POST');
+        }
         return $this->request($url, 'POST', ['json' => $options]);
     }
 
     public function patch($url, $options = [])
     {
+
         return $this->request($url, 'PATCH', ['json' => $options]);
     }
 
@@ -182,7 +186,7 @@ class Http
     {
         $method = strtoupper($method);
         $options = array_merge(self::$defaults, $options);
-        Log::debug('Client 请求:', compact('url', 'options'));
+        Log::debug('Client 请求:', compact('url', 'options','method'));
         $options['handler'] = $this->getHandler();
         $response = $this->getClient()->request($method, $url, $options);
         Log::debug('API 响应:', [
