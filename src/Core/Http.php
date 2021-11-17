@@ -116,6 +116,35 @@ class Http
     }
 
     /**
+     * Upload file.
+     *
+     * @param string $url
+     * @param array  $files
+     * @param array  $form
+     *
+     * @return ResponseInterface
+     *
+     * @throws HttpException
+     */
+    public function upload($url, array $files = [], array $form = [], array $queries = [])
+    {
+        $multipart = [];
+
+        foreach ($files as $name => $path) {
+            $multipart[] = [
+                'name' => $name,
+                'contents' => fopen($path, 'r'),
+            ];
+        }
+
+        foreach ($form as $name => $contents) {
+            $multipart[] = compact('name', 'contents');
+        }
+
+        return $this->request($url, 'POST', ['query' => $queries, 'multipart' => $multipart]);
+    }
+
+    /**
      * Set GuzzleHttp\Client.
      *
      * @param \GuzzleHttp\Client $client
