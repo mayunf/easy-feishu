@@ -22,6 +22,8 @@
     "ext-json": "*",
     "ext-openssl": "*",
     "ext-redis": "*",
+    "ext-fileinfo": "*",
+    "ext-mbstring": "*",
     "mayunfeng/supports": "^1.0",
     "pimple/pimple": "~3.0",
     "psr/simple-cache": "^1.0",

@@ -4,6 +4,7 @@ namespace EasyFeishu\Core;
 
 use EasyFeishu\AccessToken\AccessToken;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Middleware;
 use Mayunfeng\Supports\Collection;
 use Mayunfeng\Supports\Log;
@@ -69,14 +70,17 @@ abstract class AbstractAPI
         $this->http->addMiddleware($this->accessTokenMiddleware());
 
         // log
-//        $this->http->addMiddleware($this->logMiddleware());
+        $this->http->addMiddleware($this->logMiddleware());
     }
 
     protected function accessTokenMiddleware()
     {
         return function (callable $handler) {
             return function (RequestInterface $request, array $options) use ($handler) {
-                $request = $request->withHeader('Content-Type', 'application/json; charset=utf-8');
+                $headers = $request->getHeaders();
+                if (!isset($headers['Content-Type'])) {
+                    $request = $request->withHeader('Content-Type', 'application/json; charset=utf-8');
+                }
                 if (!$this->accessToken) {
                     return $handler($request, $options);
                 }
@@ -114,7 +118,7 @@ abstract class AbstractAPI
         try {
             $http = $this->getHttp();
             $contents = $http->parseJSON(call_user_func_array([$http, $method], $args));
-        } catch (ClientException $clientException) {
+        } catch (ClientException | ServerException $clientException) {
             $content = $clientException->getResponse()->getBody()->getContents();
             $contents = json_decode($content, true);
             if (json_last_error() !== JSON_ERROR_NONE && !empty($content)) {

@@ -3,6 +3,7 @@
 namespace EasyFeishu\Im;
 
 use EasyFeishu\Core\AbstractAPI;
+use EasyFeishu\Utils\File;
 use Mayunfeng\Supports\Collection;
 
 class Im extends AbstractAPI
@@ -11,12 +12,16 @@ class Im extends AbstractAPI
     const API_POST_IM_MESSAGES_REPLY = 'https://open.feishu.cn/open-apis/im/v1/messages/';
     const API_DELETE_MESSAGES = 'https://open.feishu.cn/open-apis/im/v1/messages/';
     const API_GET_MESSAGES_READ_USERS = 'https://open.feishu.cn/open-apis/im/v1/messages/';
+    const API_POST_IMAGES = 'https://open.feishu.cn/open-apis/im/v1/images';
+    const API_GET_IMAGES_BY_KEY = 'https://open.feishu.cn/open-apis/im/v1/images/';
+    const API_POST_FILES = 'https://open.feishu.cn/open-apis/im/v1/files';
+    const API_GET_FILES_BY_KEY = 'https://open.feishu.cn/open-apis/im/v1/files/';
 
     /**
      * 发送消息.
      *
-     * @param array $params 请求体
-     * @param array $query  查询参数
+     * @param  array  $params  请求体
+     * @param  array  $query  查询参数
      *
      * @return Collection
      */
@@ -31,13 +36,13 @@ class Im extends AbstractAPI
     /**
      * 发送消息.
      *
-     * @param string $messageId 消息id
-     * @param array  $params    请求体
-     * @param array  $query     查询参数
+     * @param  string  $messageId  消息id
+     * @param  array  $params  请求体
+     * @param  array  $query  查询参数
      *
      * @return Collection
      */
-    public function replyMessage(string $messageId, array $params, array $query = [])
+    public function replyMessage(string $messageId, array $params, array $query = []): Collection
     {
         return $this->parseJSON('post', [
             self::API_POST_IM_MESSAGES_REPLY.$messageId.'/reply',
@@ -48,11 +53,11 @@ class Im extends AbstractAPI
     /**
      * 撤回消息.
      *
-     * @param string $messageId 消息id
+     * @param  string  $messageId  消息id
      *
      * @return Collection
      */
-    public function delMessage($messageId)
+    public function delMessage($messageId): Collection
     {
         return $this->parseJSON('delete', [
             self::API_DELETE_MESSAGES.$messageId,
@@ -62,12 +67,12 @@ class Im extends AbstractAPI
     /**
      * 查询已读信息.
      *
-     * @param string $messageId 消息id
-     * @param array  $params
+     * @param  string  $messageId  消息id
+     * @param  array  $params
      *
      * @return Collection
      */
-    public function readUsers(string $messageId, array $params = [])
+    public function readUsers(string $messageId, array $params = []): Collection
     {
         return $this->parseJSON('get', [
             self::API_GET_MESSAGES_READ_USERS.$messageId.'/read_users?',
@@ -78,8 +83,8 @@ class Im extends AbstractAPI
     /**
      * 获取回话历史消息.
      *
-     * @param array $query
-     * @param array $params
+     * @param  array  $query
+     * @param  array  $params
      *
      * @return Collection
      */
@@ -94,13 +99,13 @@ class Im extends AbstractAPI
     /**
      * 获取消息中的文件.
      *
-     * @param string $messageId 消息id
-     * @param string $fileKey   资源key
-     * @param array  $params
+     * @param  string  $messageId  消息id
+     * @param  string  $fileKey  资源key
+     * @param  array  $params
      *
      * @return Collection
      */
-    public function getResources(string $messageId, string $fileKey, array $params)
+    public function getResources(string $messageId, string $fileKey, array $params): Collection
     {
         return $this->parseJSON('get', [
             self::API_GET_MESSAGES_READ_USERS.$messageId.'/'.'resources/'.$fileKey,
@@ -111,11 +116,11 @@ class Im extends AbstractAPI
     /**
      * 获取指定消息内容.
      *
-     * @param string $messageId 消息id
+     * @param  string  $messageId  消息id
      *
      * @return Collection
      */
-    public function getMessagesInfo($messageId)
+    public function getMessagesInfo($messageId): Collection
     {
         return $this->parseJSON('get', [
             self::API_GET_MESSAGES_READ_USERS.$messageId,
@@ -125,13 +130,13 @@ class Im extends AbstractAPI
     /**
      * 发送应用内加急.
      *
-     * @param string $messageId 消息id
-     * @param array  $params    请求体
-     * @param array  $query     查询参数
+     * @param  string  $messageId  消息id
+     * @param  array  $params  请求体
+     * @param  array  $query  查询参数
      *
      * @return Collection
      */
-    public function urgentApp(string $messageId, array $params = [], array $query = [])
+    public function urgentApp(string $messageId, array $params = [], array $query = []): Collection
     {
         return $this->parseJSON('patch', [
             self::API_GET_MESSAGES_READ_USERS.$messageId.'/urgent_app?'.http_build_query($query),
@@ -142,13 +147,13 @@ class Im extends AbstractAPI
     /**
      * 发送短信加急.
      *
-     * @param string $messageId 消息id
-     * @param array  $params    请求体
-     * @param array  $query     查询参数
+     * @param  string  $messageId  消息id
+     * @param  array  $params  请求体
+     * @param  array  $query  查询参数
      *
      * @return Collection
      */
-    public function urgentSms(string $messageId, array $params = [], array $query = [])
+    public function urgentSms(string $messageId, array $params = [], array $query = []): Collection
     {
         return $this->parseJSON('patch', [
             self::API_GET_MESSAGES_READ_USERS.$messageId.'/urgent_sms?'.http_build_query($query),
@@ -159,17 +164,108 @@ class Im extends AbstractAPI
     /**
      * 发送电话加急.
      *
-     * @param string $messageId 消息id
-     * @param array  $params    请求体
-     * @param array  $query     查询参数
+     * @param  string  $messageId  消息id
+     * @param  array  $params  请求体
+     * @param  array  $query  查询参数
      *
      * @return Collection
      */
-    public function urgentPhone(string $messageId, array $params = [], array $query = [])
+    public function urgentPhone(string $messageId, array $params = [], array $query = []): Collection
     {
         return $this->parseJSON('patch', [
             self::API_GET_MESSAGES_READ_USERS.$messageId.'/urgent_phone?'.http_build_query($query),
             $params,
         ]);
     }
+
+    /**
+     * 上传图片
+     *
+     * @param  string  $type  图片类型
+     * @param  string  $path  图片路径
+     * @return Collection
+     */
+    public function uploadImage(string $type, string $path): Collection
+    {
+        return $this->parseJSON('upload', [
+            self::API_POST_IMAGES,
+            ['image' => $path],
+            ['image_type' => $type],
+        ]);
+    }
+
+
+    /**
+     * 下载图片
+     * @param  string  $imageKey  图片key
+     * @return string 图片stream
+     */
+    public function downloadImage(string $imageKey): string
+    {
+        return $this->getStream(self::API_GET_IMAGES_BY_KEY.$imageKey);
+    }
+
+
+
+    /**
+     * 上传文件
+     * @param  string  $FileType  文件类型
+     * @param  string  $path  文件路径
+     * @param  string  $fileName  文件名称
+     * @param  int|null  $duration
+     * @return Collection
+     */
+    public function uploadFile(string $FileType, string $path, string $fileName, int $duration = null): Collection
+    {
+        $from = [
+            'file_name' => $fileName,
+            'file_type' => $FileType,
+        ];
+        if (!is_null($duration)) {
+            $from['duration'] = $duration;
+        }
+        return $this->parseJSON('upload', [
+            self::API_POST_FILES,
+            ['file' => $path],
+            $from,
+        ]);
+    }
+
+
+    /**
+     *
+     * 下载文件
+     * @param  string  $fileKey  文件key
+     * @return string 文件stream
+     */
+    public function downloadFile(string $fileKey): string
+    {
+        return $this->getStream(self::API_GET_FILES_BY_KEY.$fileKey);
+    }
+
+
+    public function getStream(string $url): string
+    {
+        $response = $this->getHttp()->get($url);
+
+        $response->getBody()->rewind();
+
+        return $response->getBody()->getContents();
+    }
+
+    /**
+     * 下载文件
+     * @param  string  $url  下载地址
+     * @param  string  $directory  要保存的路径
+     * @param  string  $filename  保存的名字（不带后缀）
+     * @return string 文件名字
+     */
+    public function download(string $url, string $directory = '', string $filename = ''): string
+    {
+        $stream = $this->getStream($url);
+        $filename .= File::getStreamExt($stream);
+        file_put_contents($directory.DIRECTORY_SEPARATOR.$filename, $stream);
+        return $filename;
+    }
+
 }
