@@ -22,8 +22,8 @@ class Schedule extends TestCase
 
     public function testGetEvent(){
         $result = $this->getInstance()->schedule->getEvent(
-            'feishu.cn_eVyEq7HTDYeiCXVzvd0oSd@group.calendar.feishu.cn',
-            'b1480700-b8d4-4a71-bff4-b75f8d81319e_0'
+            'feishu.cn_L4RCs7X8FbPBJ2SUAfpKxe@group.calendar.feishu.cn',
+            '89503948-d446-46c3-9f94-b6ff67674e3d_0'
         );
         dump($result->toArray());
         $this->assertInstanceOf(Collection::class, $result);
@@ -31,7 +31,7 @@ class Schedule extends TestCase
 
     public function testGetEvents(){
         $result = $this->getInstance()->schedule->getEvents(
-            'feishu.cn_eVyEq7HTDYeiCXVzvd0oSd@group.calendar.feishu.cn'
+            'feishu.cn_L4RCs7X8FbPBJ2SUAfpKxe@group.calendar.feishu.cn'
         );
         dump($result->toArray());
         $this->assertInstanceOf(Collection::class, $result);

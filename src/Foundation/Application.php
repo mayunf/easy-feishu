@@ -19,6 +19,11 @@ use Symfony\Component\HttpFoundation\Request;
  * @property \EasyFeishu\Im\Im                   $im
  * @property \EasyFeishu\calendar\calendar       $calendar
  * @property \EasyFeishu\calendar\schedule $schedule
+ * @property \EasyFeishu\Meeting\MeetingRoom $meetingRoom
+ * @property \EasyFeishu\Application\Order $order
+ * @property \EasyFeishu\Application\Admin $admin
+ * @property \EasyFeishu\Application\Tenant $tenant
+ * @property \EasyFeishu\Ai\Employees $employees
  */
 class Application extends Container
 {
@@ -28,6 +33,11 @@ class Application extends Container
         ServiceProviders\ImServiceProvider::class,
         ServiceProviders\CalendarServiceProvider::class,
         ServiceProviders\ScheduleServiceProvider::class,
+        ServiceProviders\MeetingRoomServiceProvider::class,
+        ServiceProviders\AdminServiceProvider::class,
+        ServiceProviders\OrderServiceProvider::class,
+        ServiceProviders\TenantServiceProvider::class,
+        ServiceProviders\EmployeesServiceProvider::class
     ];
 
     public function __construct($config)
