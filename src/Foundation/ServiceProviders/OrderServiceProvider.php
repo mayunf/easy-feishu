@@ -2,16 +2,16 @@
 
 namespace EasyFeishu\Foundation\ServiceProviders;
 
-use EasyFeishu\Im\Im;
+use EasyFeishu\Application\Order;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
-class ImServiceProvider implements ServiceProviderInterface
+class OrderServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $pimple)
     {
-        $pimple['im'] = function ($pimple) {
-            return new Im($pimple['access_token']);
+        $pimple['order'] = function ($pimple) {
+            return new Order($pimple['access_token']);
         };
     }
 }
