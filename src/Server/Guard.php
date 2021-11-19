@@ -8,7 +8,7 @@ use EasyFeishu\Core\Exceptions\EncryptionException;
 use EasyFeishu\Core\Exceptions\FaultException;
 use EasyFeishu\Core\Exceptions\InvalidArgumentException;
 use EasyFeishu\Core\Exceptions\RuntimeException;
-use EasyFeishu\Encryption\Encryptor;
+use EasyFeishu\Encryption\EncryptorTest;
 use Mayunfeng\Supports\Collection;
 use Mayunfeng\Supports\Log;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
@@ -28,7 +28,7 @@ class Guard
     protected $token;
 
     /**
-     * @var Encryptor
+     * @var EncryptorTest
      */
     protected $encryptor;
     /**
@@ -185,11 +185,11 @@ class Guard
     /**
      * Set Encryptor.
      *
-     * @param Encryptor $encryptor
+     * @param EncryptorTest $encryptor
      *
      * @return Guard
      */
-    public function setEncryptor(Encryptor $encryptor)
+    public function setEncryptor(EncryptorTest $encryptor)
     {
         $this->encryptor = $encryptor;
 
@@ -199,7 +199,7 @@ class Guard
     /**
      * Return the encryptor instance.
      *
-     * @return Encryptor
+     * @return EncryptorTest
      */
     public function getEncryptor()
     {
