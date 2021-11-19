@@ -20,8 +20,8 @@ class Im extends AbstractAPI
     /**
      * 发送消息.
      *
-     * @param  array  $params  请求体
-     * @param  array  $query  查询参数
+     * @param array $params 请求体
+     * @param array $query  查询参数
      *
      * @return Collection
      */
@@ -36,9 +36,9 @@ class Im extends AbstractAPI
     /**
      * 发送消息.
      *
-     * @param  string  $messageId  消息id
-     * @param  array  $params  请求体
-     * @param  array  $query  查询参数
+     * @param string $messageId 消息id
+     * @param array  $params    请求体
+     * @param array  $query     查询参数
      *
      * @return Collection
      */
@@ -53,7 +53,7 @@ class Im extends AbstractAPI
     /**
      * 撤回消息.
      *
-     * @param  string  $messageId  消息id
+     * @param string $messageId 消息id
      *
      * @return Collection
      */
@@ -67,8 +67,8 @@ class Im extends AbstractAPI
     /**
      * 查询已读信息.
      *
-     * @param  string  $messageId  消息id
-     * @param  array  $params
+     * @param string $messageId 消息id
+     * @param array  $params
      *
      * @return Collection
      */
@@ -83,8 +83,8 @@ class Im extends AbstractAPI
     /**
      * 获取回话历史消息.
      *
-     * @param  array  $query
-     * @param  array  $params
+     * @param array $query
+     * @param array $params
      *
      * @return Collection
      */
@@ -99,9 +99,9 @@ class Im extends AbstractAPI
     /**
      * 获取消息中的文件.
      *
-     * @param  string  $messageId  消息id
-     * @param  string  $fileKey  资源key
-     * @param  array  $params
+     * @param string $messageId 消息id
+     * @param string $fileKey   资源key
+     * @param array  $params
      *
      * @return Collection
      */
@@ -116,7 +116,7 @@ class Im extends AbstractAPI
     /**
      * 获取指定消息内容.
      *
-     * @param  string  $messageId  消息id
+     * @param string $messageId 消息id
      *
      * @return Collection
      */
@@ -130,9 +130,9 @@ class Im extends AbstractAPI
     /**
      * 发送应用内加急.
      *
-     * @param  string  $messageId  消息id
-     * @param  array  $params  请求体
-     * @param  array  $query  查询参数
+     * @param string $messageId 消息id
+     * @param array  $params    请求体
+     * @param array  $query     查询参数
      *
      * @return Collection
      */
@@ -147,9 +147,9 @@ class Im extends AbstractAPI
     /**
      * 发送短信加急.
      *
-     * @param  string  $messageId  消息id
-     * @param  array  $params  请求体
-     * @param  array  $query  查询参数
+     * @param string $messageId 消息id
+     * @param array  $params    请求体
+     * @param array  $query     查询参数
      *
      * @return Collection
      */
@@ -164,9 +164,9 @@ class Im extends AbstractAPI
     /**
      * 发送电话加急.
      *
-     * @param  string  $messageId  消息id
-     * @param  array  $params  请求体
-     * @param  array  $query  查询参数
+     * @param string $messageId 消息id
+     * @param array  $params    请求体
+     * @param array  $query     查询参数
      *
      * @return Collection
      */
@@ -179,25 +179,27 @@ class Im extends AbstractAPI
     }
 
     /**
-     * 上传图片
+     * 上传图片.
      *
-     * @param  string  $type  图片类型
-     * @param  string  $path  图片路径
+     * @param string $type 图片类型
+     * @param string $path 图片路径
+     *
      * @return Collection
      */
     public function uploadImage(string $type, string $path): Collection
     {
         return $this->parseJSON('upload', [
             self::API_POST_IMAGES,
-            ['image' => $path],
+            ['image'      => $path],
             ['image_type' => $type],
         ]);
     }
 
-
     /**
-     * 下载图片
-     * @param  string  $imageKey  图片key
+     * 下载图片.
+     *
+     * @param string $imageKey 图片key
+     *
      * @return string 图片stream
      */
     public function downloadImage(string $imageKey): string
@@ -205,14 +207,14 @@ class Im extends AbstractAPI
         return $this->getStream(self::API_GET_IMAGES_BY_KEY.$imageKey);
     }
 
-
-
     /**
-     * 上传文件
-     * @param  string  $FileType  文件类型
-     * @param  string  $path  文件路径
-     * @param  string  $fileName  文件名称
-     * @param  int|null  $duration
+     * 上传文件.
+     *
+     * @param string   $FileType 文件类型
+     * @param string   $path     文件路径
+     * @param string   $fileName 文件名称
+     * @param int|null $duration
+     *
      * @return Collection
      */
     public function uploadFile(string $FileType, string $path, string $fileName, int $duration = null): Collection
@@ -224,6 +226,7 @@ class Im extends AbstractAPI
         if (!is_null($duration)) {
             $from['duration'] = $duration;
         }
+
         return $this->parseJSON('upload', [
             self::API_POST_FILES,
             ['file' => $path],
@@ -231,18 +234,17 @@ class Im extends AbstractAPI
         ]);
     }
 
-
     /**
+     * 下载文件.
      *
-     * 下载文件
-     * @param  string  $fileKey  文件key
+     * @param string $fileKey 文件key
+     *
      * @return string 文件stream
      */
     public function downloadFile(string $fileKey): string
     {
         return $this->getStream(self::API_GET_FILES_BY_KEY.$fileKey);
     }
-
 
     public function getStream(string $url): string
     {
@@ -254,10 +256,12 @@ class Im extends AbstractAPI
     }
 
     /**
-     * 下载文件
-     * @param  string  $url  下载地址
-     * @param  string  $directory  要保存的路径
-     * @param  string  $filename  保存的名字（不带后缀）
+     * 下载文件.
+     *
+     * @param string $url       下载地址
+     * @param string $directory 要保存的路径
+     * @param string $filename  保存的名字（不带后缀）
+     *
      * @return string 文件名字
      */
     public function download(string $url, string $directory = '', string $filename = ''): string
@@ -265,7 +269,7 @@ class Im extends AbstractAPI
         $stream = $this->getStream($url);
         $filename .= File::getStreamExt($stream);
         file_put_contents($directory.DIRECTORY_SEPARATOR.$filename, $stream);
+
         return $filename;
     }
-
 }

@@ -118,7 +118,7 @@ abstract class AbstractAPI
         try {
             $http = $this->getHttp();
             $contents = $http->parseJSON(call_user_func_array([$http, $method], $args));
-        } catch (ClientException | ServerException $clientException) {
+        } catch (ClientException|ServerException $clientException) {
             $content = $clientException->getResponse()->getBody()->getContents();
             $contents = json_decode($content, true);
             if (json_last_error() !== JSON_ERROR_NONE && !empty($content)) {
