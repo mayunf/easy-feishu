@@ -14,11 +14,18 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class Application.
  *
- * @property \EasyFeishu\AccessToken\AccessToken            $access_token
- * @property \Mayunfeng\Supports\Config                     $config
- * @property \EasyFeishu\Contact\Contact                    $contact
- * @property \EasyFeishu\Im\Im                              $im
- * @property \Symfony\Component\HttpFoundation\Request      $request
+ * @property \EasyFeishu\Contact\Contact         $contact
+ * @property \EasyFeishu\AccessToken\AccessToken $access_token
+ * @property \EasyFeishu\Im\Im                   $im
+ * @property \EasyFeishu\calendar\calendar       $calendar
+ * @property \EasyFeishu\calendar\schedule $schedule
+ * @property \EasyFeishu\Meeting\MeetingRoom $meetingRoom
+ * @property \EasyFeishu\Application\Order $order
+ * @property \EasyFeishu\Application\Admin $admin
+ * @property \EasyFeishu\Application\Tenant $tenant
+ * @property \EasyFeishu\Ai\Employees $employees
+ * @property \EasyFeishu\Contact\ContactUsers $contactUsers
+ *
  */
 class Application extends Container
 {
@@ -26,6 +33,14 @@ class Application extends Container
         ServiceProviders\AccessTokenServiceProvider::class,
         ServiceProviders\ContactServiceProvider::class,
         ServiceProviders\ImServiceProvider::class,
+        ServiceProviders\CalendarServiceProvider::class,
+        ServiceProviders\ScheduleServiceProvider::class,
+        ServiceProviders\MeetingRoomServiceProvider::class,
+        ServiceProviders\AdminServiceProvider::class,
+        ServiceProviders\OrderServiceProvider::class,
+        ServiceProviders\TenantServiceProvider::class,
+        ServiceProviders\EmployeesServiceProvider::class,
+        ServiceProviders\ContactUsersServiceProvider::class,
     ];
 
     public function __construct($config)
