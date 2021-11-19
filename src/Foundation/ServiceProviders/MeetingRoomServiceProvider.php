@@ -1,8 +1,6 @@
 <?php
 
-
 namespace EasyFeishu\Foundation\ServiceProviders;
-
 
 use EasyFeishu\Meeting\MeetingRoom;
 use Pimple\Container;

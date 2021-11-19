@@ -18,14 +18,13 @@ use Symfony\Component\HttpFoundation\Request;
  * @property \EasyFeishu\AccessToken\AccessToken $access_token
  * @property \EasyFeishu\Im\Im                   $im
  * @property \EasyFeishu\calendar\calendar       $calendar
- * @property \EasyFeishu\calendar\schedule $schedule
- * @property \EasyFeishu\Meeting\MeetingRoom $meetingRoom
- * @property \EasyFeishu\Application\Order $order
- * @property \EasyFeishu\Application\Admin $admin
- * @property \EasyFeishu\Application\Tenant $tenant
- * @property \EasyFeishu\Ai\Employees $employees
- * @property \EasyFeishu\Contact\ContactUsers $contactUsers
- *
+ * @property \EasyFeishu\calendar\schedule       $schedule
+ * @property \EasyFeishu\Meeting\MeetingRoom     $meetingRoom
+ * @property \EasyFeishu\Application\Order       $order
+ * @property \EasyFeishu\Application\Admin       $admin
+ * @property \EasyFeishu\Application\Tenant      $tenant
+ * @property \EasyFeishu\Ai\Employees            $employees
+ * @property \EasyFeishu\Contact\ContactUsers    $contactUsers
  */
 class Application extends Container
 {
@@ -88,22 +87,22 @@ class Application extends Container
             $logFile = $this['config']['log.file'];
             $logger->pushHandler(
                 new StreamHandler(
-                $logFile,
-                $this['config']->get('log.level', Logger::WARNING),
-                true,
-                $this['config']->get('log.permission', null)
-            )
+                    $logFile,
+                    $this['config']->get('log.level', Logger::WARNING),
+                    true,
+                    $this['config']->get('log.permission', null)
+                )
             );
         } elseif ($this['config']['log.handler'] instanceof HandlerInterface) {
             $logger->pushHandler($this['config']['log.handler']);
         } elseif ($logFile = $this['config']['log.file']) {
             $logger->pushHandler(
                 new StreamHandler(
-                $logFile,
-                $this['config']->get('log.level', Logger::WARNING),
-                true,
-                $this['config']->get('log.permission', null)
-            )
+                    $logFile,
+                    $this['config']->get('log.level', Logger::WARNING),
+                    true,
+                    $this['config']->get('log.permission', null)
+                )
             );
         }
         Log::setLogger($logger);
