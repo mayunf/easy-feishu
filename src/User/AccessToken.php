@@ -1,8 +1,6 @@
 <?php
 
-
 namespace EasyFeishu\User;
-
 
 use EasyFeishu\Core\Interfaces\AccessTokenInterface;
 
@@ -13,7 +11,7 @@ class AccessToken implements AccessTokenInterface
     public function __construct($token)
     {
         $this->token = [
-            $this->getTokenKey() => $token
+            $this->getTokenKey() => $token,
         ];
     }
 
@@ -25,10 +23,8 @@ class AccessToken implements AccessTokenInterface
         return $this->token;
     }
 
-
     public function getTokenKey()
     {
         return 'access_token';
     }
-
 }

@@ -13,5 +13,4 @@ class Mina extends TestCase
         dump($result->toArray());
         $this->assertInstanceOf(Collection::class, $result);
     }
-
 }

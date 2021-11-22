@@ -2,7 +2,6 @@
 
 namespace EasyFeishu\Core;
 
-use EasyFeishu\AccessToken\AccessToken;
 use EasyFeishu\Core\Interfaces\AccessTokenInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
