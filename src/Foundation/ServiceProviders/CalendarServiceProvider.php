@@ -11,7 +11,7 @@ class CalendarServiceProvider implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         $pimple['calendar'] = function ($pimple) {
-            return new calendar($pimple['access_token']);
+            return new Calendar($pimple['access_token']);
         };
     }
 }

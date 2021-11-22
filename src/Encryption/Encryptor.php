@@ -66,4 +66,14 @@ class Encryptor
         }
     }
 
+    /**
+     * @param  array  $content
+     * @return mixed
+     */
+    public function decryptMsg(array $content)
+    {
+        $json =  $this->decrypt($content['encrypt']);
+        return json_decode($json, true);
+    }
+
 }

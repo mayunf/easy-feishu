@@ -11,7 +11,7 @@ class ScheduleServiceProvider implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         $pimple['schedule'] = function ($pimple) {
-            return new schedule($pimple['access_token']);
+            return new Schedule($pimple['access_token']);
         };
     }
 }
