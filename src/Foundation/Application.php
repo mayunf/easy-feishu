@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @property \EasyFeishu\Application\Tenant      $tenant
  * @property \EasyFeishu\Ai\Employees            $employees
  * @property \EasyFeishu\Contact\ContactUsers    $contactUsers
+ * @property \EasyFeishu\Server\Guard            $server
  */
 class Application extends Container
 {
@@ -40,6 +41,7 @@ class Application extends Container
         ServiceProviders\TenantServiceProvider::class,
         ServiceProviders\EmployeesServiceProvider::class,
         ServiceProviders\ContactUsersServiceProvider::class,
+        ServiceProviders\ServerServiceProvider::class,
     ];
 
     public function __construct($config)
@@ -115,7 +117,7 @@ class Application extends Container
      *
      * @return Application
      */
-    public function addProvider($provider)
+    public function addProvider($provider): Application
     {
         array_push($this->providers, $provider);
 
@@ -140,7 +142,7 @@ class Application extends Container
      *
      * @return array
      */
-    public function getProviders()
+    public function getProviders(): array
     {
         return $this->providers;
     }

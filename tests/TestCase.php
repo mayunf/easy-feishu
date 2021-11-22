@@ -15,6 +15,8 @@ class TestCase extends BaseTestCase
             'debug'       => false,
             'app_id'      => 'cli_a1fa7d0637f85013',
             'app_secret'  => 'Vt4pNC4zaQr0Ve4cljH3iyh7ZyHrufC7',
+            'encrypt_key'  => 'KoyRKmjqQnbfq5dA77CR2fKOPnuMrrjZ',
+            'verification_token'  => 'HzzJJb58zEinf6MLUiXSYcMJfIzPHFgU',
             'log'         => [
                 'file'  => __DIR__.'/../logs/'.date('Y-m-d').'.log',
                 'level' => 'debug',
