@@ -1,8 +1,6 @@
 <?php
 
-
 namespace EasyFeishu\Foundation\ServiceProviders;
-
 
 use EasyFeishu\Encryption\Encryptor;
 use EasyFeishu\Server\Guard;
@@ -11,7 +9,6 @@ use Pimple\ServiceProviderInterface;
 
 class ServerServiceProvider implements ServiceProviderInterface
 {
-
     public function register(Container $pimple)
     {
         $pimple['encryptor'] = function ($pimple) {
@@ -22,8 +19,8 @@ class ServerServiceProvider implements ServiceProviderInterface
             $server = new Guard();
             $server->debug($pimple['config']['debug']);
             $server->setEncryptor($pimple['encryptor']);
+
             return $server;
         };
     }
-
 }

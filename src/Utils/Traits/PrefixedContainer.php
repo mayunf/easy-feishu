@@ -1,8 +1,6 @@
 <?php
 
-
 namespace EasyFeishu\Utils\Traits;
-
 
 use Mayunfeng\Supports\Str;
 use Pimple\Container;
@@ -55,9 +53,9 @@ trait PrefixedContainer
      *
      * @param string $key The unique identifier for the parameter or object
      *
-     * @return mixed The value of the parameter or an object
-     *
      * @throws \InvalidArgumentException If the identifier is not defined
+     *
+     * @return mixed The value of the parameter or an object
      */
     public function __get($key)
     {
