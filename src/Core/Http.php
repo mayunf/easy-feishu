@@ -81,12 +81,12 @@ class Http
         if (empty($options)) {
             return $this->request($url, 'POST');
         }
+
         return $this->request($url, 'POST', ['json' => $options]);
     }
 
     public function patch($url, $options = [])
     {
-
         return $this->request($url, 'PATCH', ['json' => $options]);
     }
 
@@ -126,9 +126,9 @@ class Http
      * @param array  $files
      * @param array  $form
      *
-     * @return ResponseInterface
-     *
      * @throws HttpException
+     *
+     * @return ResponseInterface
      */
     public function upload($url, array $files = [], array $form = [], array $queries = [])
     {
@@ -136,7 +136,7 @@ class Http
 
         foreach ($files as $name => $path) {
             $multipart[] = [
-                'name' => $name,
+                'name'     => $name,
                 'contents' => fopen($path, 'r'),
             ];
         }
@@ -215,7 +215,7 @@ class Http
     {
         $method = strtoupper($method);
         $options = array_merge(self::$defaults, $options);
-        Log::debug('Client 请求:', compact('url', 'options','method'));
+        Log::debug('Client 请求:', compact('url', 'options', 'method'));
         $options['handler'] = $this->getHandler();
         $response = $this->getClient()->request($method, $url, $options);
         Log::debug('API 响应:', [
