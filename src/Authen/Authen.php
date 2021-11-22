@@ -13,8 +13,9 @@ class Authen extends AbstractAPI
     /**
      * 该接口仅适用于通过网页应用登录方式获取的预授权码
      *
-     * @param  string  $code
-     * @param  string  $grantType
+     * @param string $code
+     * @param string $grantType
+     *
      * @return Collection
      */
     public function accessToken(string $code, string $grantType = 'authorization_code'): Collection
@@ -23,15 +24,17 @@ class Authen extends AbstractAPI
             self::API_POST_AUTHEN_ACCESS_TOKEN,
             [
                 'grant_type' => $grantType,
-                'code' => $code
-            ]
+                'code'       => $code,
+            ],
         ]);
     }
+
     /**
-     * 刷新 access_token
+     * 刷新 access_token.
      *
-     * @param  string  $refreshToken
-     * @param  string  $grantType
+     * @param string $refreshToken
+     * @param string $grantType
+     *
      * @return Collection
      */
     public function refreshAccessToken(string $refreshToken, string $grantType = 'refresh_token'): Collection
@@ -39,10 +42,9 @@ class Authen extends AbstractAPI
         return $this->parseJSON('post', [
             self::API_POST_AUTHEN_REFRESH_ACCESS_TOKEN,
             [
-                'grant_type' => $grantType,
-                'refresh_token' => $refreshToken
-            ]
+                'grant_type'    => $grantType,
+                'refresh_token' => $refreshToken,
+            ],
         ]);
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace EasyFeishu\Foundation\ServiceProviders;
 
-use EasyFeishu\Mina\Mina;
 use EasyFeishu\User\AccessToken;
 use EasyFeishu\User\Authen\Authen;
 use EasyFeishu\User\User;
@@ -24,6 +23,5 @@ class UserServiceProvider implements ServiceProviderInterface
         $pimple['user'] = function ($pimple) {
             return new User($pimple);
         };
-
     }
 }

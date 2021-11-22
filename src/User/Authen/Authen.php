@@ -17,7 +17,7 @@ class Authen extends AbstractAPI
     public function userInfo(): Collection
     {
         return $this->parseJSON('get', [
-            self::API_GET_AUTHEN_USER_INFO
+            self::API_GET_AUTHEN_USER_INFO,
         ]);
     }
 }
