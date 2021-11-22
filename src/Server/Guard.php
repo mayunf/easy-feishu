@@ -1,8 +1,6 @@
 <?php
 
-
 namespace EasyFeishu\Server;
-
 
 use EasyFeishu\Core\Exceptions\InvalidArgumentException;
 use EasyFeishu\Core\Exceptions\RuntimeException;
@@ -22,7 +20,6 @@ class Guard
      */
     protected $request;
 
-
     /**
      * @var Encryptor
      */
@@ -37,7 +34,6 @@ class Guard
      */
     protected $messageHandler;
 
-
     /**
      * Event handlers.
      *
@@ -45,22 +41,20 @@ class Guard
      */
     protected $handlers;
 
-
     /**
      * Constructor.
      *
-     * @param  Request|null  $request
+     * @param Request|null $request
      */
     public function __construct(Request $request = null)
     {
         $this->request = $request ?: Request::createFromGlobals();
     }
 
-
     /**
      * Enable/Disable debug mode.
      *
-     * @param  bool  $debug
+     * @param bool $debug
      *
      * @return $this
      */
@@ -75,7 +69,6 @@ class Guard
      * Handle and return response.
      *
      * @return Response
-     *
      */
     public function serve(): Response
     {
@@ -86,17 +79,16 @@ class Guard
         $this->handleEventMessage($message);
 
         return new Response(self::SUCCESS_EMPTY_RESPONSE);
-
     }
-
 
     /**
      * Add a event listener.
      *
-     * @param  callable|null  $callback
-     * @return Guard
+     * @param callable|null $callback
      *
      * @throws InvalidArgumentException
+     *
+     * @return Guard
      */
     public function setMessageHandler(callable $callback = null): Guard
     {
@@ -132,7 +124,7 @@ class Guard
     /**
      * Request setter.
      *
-     * @param  Request  $request
+     * @param Request $request
      *
      * @return $this
      */
@@ -143,11 +135,10 @@ class Guard
         return $this;
     }
 
-
     /**
      * Set Encryptor.
      *
-     * @param  Encryptor  $encryptor
+     * @param Encryptor $encryptor
      *
      * @return Guard
      */
@@ -172,7 +163,6 @@ class Guard
      * Get request message.
      *
      * @return array
-     *
      */
     public function getMessage(): array
     {
@@ -188,14 +178,14 @@ class Guard
     /**
      * Parse message array from raw php input.
      *
-     * @param  array  $content
+     * @param array $content
+     *
+     * @throws RuntimeException
      *
      * @return array
-     * @throws RuntimeException
      */
     protected function parseMessageFromRequest(array $content): array
     {
-
         if ($this->isSafeMode()) {
             if (!$this->encryptor) {
                 throw new RuntimeException('Safe mode Encryptor is necessary, please use Guard::setEncryptor(Encryptor $encryptor) set the encryptor instance.');
@@ -227,5 +217,4 @@ class Guard
             call_user_func_array($messageHandler, [$message]);
         }
     }
-
 }
