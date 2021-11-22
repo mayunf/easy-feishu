@@ -7,9 +7,10 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
+    /** @var Application */
     private static $_instance;
 
-    public function getInstance()
+    public function getInstance(): Application
     {
         self::$_instance = new Application([
             'debug'               => false,

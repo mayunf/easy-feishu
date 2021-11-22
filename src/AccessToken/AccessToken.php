@@ -3,13 +3,14 @@
 namespace EasyFeishu\AccessToken;
 
 use EasyFeishu\Core\Exceptions\HttpException;
+use EasyFeishu\Core\Interfaces\AccessTokenInterface;
 use Mayunfeng\Supports\Traits\HasHttpRequest;
 use Pimple\Container;
 use Psr\SimpleCache\CacheInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Psr16Cache;
 
-class AccessToken
+class AccessToken implements AccessTokenInterface
 {
     use HasHttpRequest;
 
@@ -23,12 +24,16 @@ class AccessToken
     protected $cache;
     //访问token
     protected $cachePrefix = 'EasyFeishu.access_token.';
-    const TOKEN_KEY = 'tenant_access_token';
 
     public function __construct(Container $app)
     {
         $this->app = $app;
         $this->cache = $this->app['config']['cache'];
+    }
+
+    public function getTokenKey()
+    {
+        return 'tenant_access_token';
     }
 
     protected function getCacheKey()
@@ -69,7 +74,7 @@ class AccessToken
     public function setToken($token)
     {
         $cacheKey = $this->cachePrefix.$this->app['config']['app_id'];
-        $this->getCache()->set($cacheKey, $token[self::TOKEN_KEY], $token['expire'] - 60);
+        $this->getCache()->set($cacheKey, $token[$this->getTokenKey()], $token['expire'] - 60);
 
         return $this;
     }
@@ -83,7 +88,7 @@ class AccessToken
     {
         $response = $this->sendRequest($arguments);
 
-        if (empty($response[self::TOKEN_KEY])) {
+        if (empty($response[$this->getTokenKey()])) {
             throw new HttpException('Request access_token fail:'.json_encode($response, JSON_UNESCAPED_UNICODE));
         }
 

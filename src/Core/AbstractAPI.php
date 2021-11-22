@@ -3,6 +3,7 @@
 namespace EasyFeishu\Core;
 
 use EasyFeishu\AccessToken\AccessToken;
+use EasyFeishu\Core\Interfaces\AccessTokenInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Middleware;
@@ -25,7 +26,7 @@ abstract class AbstractAPI
     /** @var Http */
     protected $http;
 
-    public function __construct(AccessToken $accessToken)
+    public function __construct(AccessTokenInterface $accessToken)
     {
         $this->accessToken = $accessToken;
     }
@@ -85,7 +86,7 @@ abstract class AbstractAPI
                     return $handler($request, $options);
                 }
                 $token = $this->accessToken->getToken();
-                $request = $request->withHeader('Authorization', 'Bearer '.$token[AccessToken::TOKEN_KEY]);
+                $request = $request->withHeader('Authorization', 'Bearer '.$token[$this->accessToken->getTokenKey()]);
 
                 return $handler($request, $options);
             };
