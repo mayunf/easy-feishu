@@ -30,6 +30,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @property \EasyFeishu\Authen\Authen           $authen
  * @property \EasyFeishu\User\User               $user
  * @property Config                              $config
+ * @property \EasyFeishu\Im\Group               $group
  */
 class Application extends Container
 {
@@ -49,6 +50,7 @@ class Application extends Container
         ServiceProviders\MinaServiceProvider::class,
         ServiceProviders\AuthenServiceProvider::class,
         ServiceProviders\UserServiceProvider::class,
+        ServiceProviders\GroupServiceProvider::class,
     ];
 
     public function __construct($config)

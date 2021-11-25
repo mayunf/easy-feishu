@@ -21,7 +21,7 @@ class ImTest extends TestCase
 
     public function testReplyMessage()
     {
-        $result = $this->getInstance()->im->replyMessage('om_04a8f4ff978844bba2b8a52c5046f1fc', [
+        $result = $this->getInstance()->im->replyMessage('om_2bec91ba306b5635b8465b88dcc0500c', [
             'content'  => '{"text":"我是回复消息"}',
             'msg_type' => 'text',
         ]);
@@ -31,7 +31,7 @@ class ImTest extends TestCase
 
     public function testDelMessage()
     {
-        $result = $this->getInstance()->im->delMessage('om_04a8f4ff978844bba2b8a52c5046f1fc');
+        $result = $this->getInstance()->im->delMessage('om_7c16476b059d840fd72484cb43c38e83');
         dump($result->toArray());
         $this->assertInstanceOf(Collection::class, $result);
     }
@@ -168,4 +168,12 @@ class ImTest extends TestCase
         @unlink(__DIR__.DIRECTORY_SEPARATOR.$result);
         $this->assertIsString($result);
     }
+
+    public function testPatchMessages(){
+        $result = $this->getInstance()->im->patchMessages('om_bc792dc03c70a470def0e089172b2549',
+            ['content'=>'{"text":"我是测试消息1"}']);
+        dump($result->toArray());
+        $this->assertInstanceOf(Collection::class, $result);
+    }
+
 }
