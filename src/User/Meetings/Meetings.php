@@ -11,6 +11,7 @@ class Meetings extends AbstractAPI
     const API_GET_MEETINGS_LIST = 'https://open.feishu.cn/open-apis/vc/v1/meetings/list_by_no';
     const API_PATCH_MEETINGS_HOST = 'https://open.feishu.cn/open-apis/vc/v1/meetings/';
     const API_PATCH_MEETINGS_INVITE = 'https://open.feishu.cn/open-apis/vc/v1/meetings/';
+    const API_PATCH_RECORDING_START = 'https://open.feishu.cn/open-apis/vc/v1/meetings/';
 
     /**
      * 获取会议详情
@@ -81,4 +82,54 @@ class Meetings extends AbstractAPI
         ]);
     }
 
+    /**
+     * 开始录制
+     * @param string $meetingId 会议室id
+     *
+     * @return Collection
+     */
+    public function recordingStart(string $meetingId){
+        return $this->parseJSON('patch',[
+            self::API_PATCH_RECORDING_START.$meetingId.'/recording/start',
+            ['timezone' => 8]
+        ]);
+    }
+
+    /**
+     * 结束录制
+     * @param string $meetingId 会议室id
+     *
+     * @return Collection
+     */
+    public function recordingStop(string $meetingId){
+        return $this->parseJSON('patch',[
+            self::API_PATCH_RECORDING_START.$meetingId.'/recording/stop'
+        ]);
+    }
+
+    /**
+     * 获取录制文件
+     * @param string $meetingId 会议室id
+     *
+     * @return Collection
+     */
+    public function getRecording(string $meetingId){
+        return $this->parseJSON('get',[
+            self::API_PATCH_RECORDING_START.$meetingId.'/recording'
+        ]);
+    }
+
+    /**
+     * 授权录制文件
+     * @param string $meetingId 会议室id
+     * @param array $params 请求体
+     * @param array $query  查询参数
+     * @return Collection
+     */
+    public function permissionRecording(string $meetingId, array $params, array $query = ['user_id_type'=>'open_id']){
+        return $this->parseJSON('patch',[
+            self::API_PATCH_RECORDING_START.$meetingId.'/recording/set_permission?'.http_build_query($query),
+            $params
+        ]);
+    }
 }

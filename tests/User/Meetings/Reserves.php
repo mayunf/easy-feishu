@@ -9,7 +9,7 @@ class Reserves extends UserTest
 {
     //预约会议
     public function testReservesApply(){
-        $result = $this->getUser()->reserves->reservesApply(['end_time'=>1637920800]);
+        $result = $this->getUser()->reserves->reservesApply(['end_time'=>1638175530]);
         dump($result->toArray());
         $this->assertInstanceOf(Collection::class, $result);
     }
@@ -30,7 +30,7 @@ class Reserves extends UserTest
     }
     //获取活跃预约
     public function testGetReservesActive(){
-        $result = $this->getUser()->reserves->getReservesActive('7034788169648668700');
+        $result = $this->getUser()->reserves->getReservesActive('7035802784814514180');
         dump($result->toArray());
         $this->assertInstanceOf(Collection::class, $result);
     }
