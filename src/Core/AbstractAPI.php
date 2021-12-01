@@ -2,7 +2,7 @@
 
 namespace EasyFeishu\Core;
 
-use EasyFeishu\AccessToken\AccessToken;
+use EasyFeishu\Core\Interfaces\AccessTokenInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Middleware;
@@ -16,16 +16,12 @@ use Psr\Http\Message\RequestInterface;
  */
 abstract class AbstractAPI
 {
-    const POST = 'post';
-
-    const GET = 'get';
-
     public $accessToken;
 
     /** @var Http */
     protected $http;
 
-    public function __construct(AccessToken $accessToken)
+    public function __construct(AccessTokenInterface $accessToken)
     {
         $this->accessToken = $accessToken;
     }
@@ -35,7 +31,7 @@ abstract class AbstractAPI
      *
      * @return Http
      */
-    public function getHttp()
+    public function getHttp(): Http
     {
         if (is_null($this->http)) {
             $this->http = new Http();
@@ -45,20 +41,6 @@ abstract class AbstractAPI
         }
 
         return $this->http;
-    }
-
-    /**
-     * Set the http instance.
-     *
-     * @param Http $http
-     *
-     * @return $this
-     */
-    public function setHttp(Http $http)
-    {
-        $this->http = $http;
-
-        return $this;
     }
 
     /**
@@ -85,7 +67,7 @@ abstract class AbstractAPI
                     return $handler($request, $options);
                 }
                 $token = $this->accessToken->getToken();
-                $request = $request->withHeader('Authorization', 'Bearer '.$token[AccessToken::TOKEN_KEY]);
+                $request = $request->withHeader('Authorization', 'Bearer '.$token[$this->accessToken->getTokenKey()]);
 
                 return $handler($request, $options);
             };
@@ -97,7 +79,7 @@ abstract class AbstractAPI
      *
      * @return \Closure
      */
-    protected function logMiddleware()
+    protected function logMiddleware(): \Closure
     {
         return Middleware::tap(function (RequestInterface $request, $options) {
             Log::debug("Request: {$request->getMethod()} {$request->getUri()} ".json_encode($options));

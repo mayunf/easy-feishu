@@ -26,6 +26,10 @@ use Symfony\Component\HttpFoundation\Request;
  * @property \EasyFeishu\Ai\Employees            $employees
  * @property \EasyFeishu\Contact\ContactUsers    $contactUsers
  * @property \EasyFeishu\Server\Guard            $server
+ * @property \EasyFeishu\Mina\Mina               $mina
+ * @property \EasyFeishu\Authen\Authen           $authen
+ * @property \EasyFeishu\User\User               $user
+ * @property Config                              $config
  */
 class Application extends Container
 {
@@ -42,6 +46,9 @@ class Application extends Container
         ServiceProviders\EmployeesServiceProvider::class,
         ServiceProviders\ContactUsersServiceProvider::class,
         ServiceProviders\ServerServiceProvider::class,
+        ServiceProviders\MinaServiceProvider::class,
+        ServiceProviders\AuthenServiceProvider::class,
+        ServiceProviders\UserServiceProvider::class,
     ];
 
     public function __construct($config)
