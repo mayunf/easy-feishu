@@ -90,6 +90,7 @@ class Http
         if (empty($options)) {
             return $this->request($url, 'PATCH');
         }
+
         return $this->request($url, 'PATCH', ['json' => $options]);
     }
 
@@ -103,6 +104,7 @@ class Http
         if (empty($options)) {
             return $this->request($url, 'DELETE');
         }
+
         return $this->request($url, 'DELETE', ['json' => $options]);
     }
 

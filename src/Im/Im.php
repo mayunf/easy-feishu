@@ -17,10 +17,10 @@ class Im extends AbstractAPI
     const API_POST_FILES = 'https://open.feishu.cn/open-apis/im/v1/files';
     const API_GET_FILES_BY_KEY = 'https://open.feishu.cn/open-apis/im/v1/files/';
 
-    const API_PATCH_MESSAGES = "https://open.feishu.cn/open-apis/im/v1/messages/";
-    const API_POST_MESSAGES_UPDATE = "https://open.feishu.cn/open-apis/interactive/v1/card/update";
-    const API_POST_EPHEMERAL_SEND = "https://open.feishu.cn/open-apis/ephemeral/v1/send";
-    const API_POST_EPHEMERAL_DELETE = "https://open.feishu.cn/open-apis/ephemeral/v1/delete";
+    const API_PATCH_MESSAGES = 'https://open.feishu.cn/open-apis/im/v1/messages/';
+    const API_POST_MESSAGES_UPDATE = 'https://open.feishu.cn/open-apis/interactive/v1/card/update';
+    const API_POST_EPHEMERAL_SEND = 'https://open.feishu.cn/open-apis/ephemeral/v1/send';
+    const API_POST_EPHEMERAL_DELETE = 'https://open.feishu.cn/open-apis/ephemeral/v1/delete';
 
     /**
      * 发送消息.
@@ -279,14 +279,15 @@ class Im extends AbstractAPI
     }
 
     /**
-     * 更新应用发送的消息
+     * 更新应用发送的消息.
      *
      * @param string $messageId 消息id
      * @param array  $params    请求体
      *
      * @return Collection
      */
-    public function patchMessages(string $messageId,array $params){
+    public function patchMessages(string $messageId, array $params)
+    {
         return $this->parseJSON('patch', [
             self::API_PATCH_MESSAGES.$messageId,
             $params,
@@ -296,11 +297,12 @@ class Im extends AbstractAPI
     /**
      * 消息卡片延迟更新.
      *
-     * @param array  $params    请求体
+     * @param array $params 请求体
      *
      * @return Collection
      */
-    public function cardUpdate(array $params){
+    public function cardUpdate(array $params)
+    {
         return $this->parseJSON('patch', [
             self::API_POST_MESSAGES_UPDATE,
             $params,
@@ -308,13 +310,14 @@ class Im extends AbstractAPI
     }
 
     /**
-     * 发送「仅你可见」的临时消息
+     * 发送「仅你可见」的临时消息.
      *
-     * @param array  $params    请求体
+     * @param array $params 请求体
      *
      * @return Collection
      */
-    public function sendEphemeral(array $params){
+    public function sendEphemeral(array $params)
+    {
         return $this->parseJSON('post', [
             self::API_POST_EPHEMERAL_SEND,
             $params,
@@ -322,18 +325,17 @@ class Im extends AbstractAPI
     }
 
     /**
-     * 删除「仅你可见」的临时消息
+     * 删除「仅你可见」的临时消息.
      *
-     * @param array  $params    请求体
+     * @param array $params 请求体
      *
      * @return Collection
      */
-    public function deleteEphemeral(array $params){
+    public function deleteEphemeral(array $params)
+    {
         return $this->parseJSON('post', [
             self::API_POST_EPHEMERAL_DELETE,
             $params,
         ]);
     }
-
-
 }

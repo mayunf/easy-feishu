@@ -169,11 +169,13 @@ class ImTest extends TestCase
         $this->assertIsString($result);
     }
 
-    public function testPatchMessages(){
-        $result = $this->getInstance()->im->patchMessages('om_bc792dc03c70a470def0e089172b2549',
-            ['content'=>'{"text":"我是测试消息1"}']);
+    public function testPatchMessages()
+    {
+        $result = $this->getInstance()->im->patchMessages(
+            'om_bc792dc03c70a470def0e089172b2549',
+            ['content'=> '{"text":"我是测试消息1"}']
+        );
         dump($result->toArray());
         $this->assertInstanceOf(Collection::class, $result);
     }
-
 }

@@ -2,8 +2,8 @@
 
 namespace EasyFeishu\Tests\User\Im;
 
-use Mayunfeng\Supports\Collection;
 use EasyFeishu\Tests\User\UserTest;
+use Mayunfeng\Supports\Collection;
 
 class ImTest extends UserTest
 {
@@ -14,5 +14,4 @@ class ImTest extends UserTest
         dump($result->toArray());
         $this->assertInstanceOf(Collection::class, $result);
     }
-
 }

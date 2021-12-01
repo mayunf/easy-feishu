@@ -1,11 +1,10 @@
 <?php
 
-
 namespace EasyFeishu\Tests\User\Calendars;
 
-use EasyFeishu\Mina\Mina;
-use Mayunfeng\Supports\Collection;
 use EasyFeishu\Tests\User\UserTest;
+use Mayunfeng\Supports\Collection;
+
 class Calendars extends UserTest
 {
     public function testCreateCalendar()
@@ -78,7 +77,8 @@ class Calendars extends UserTest
         $this->assertInstanceOf(Collection::class, $result);
     }
 
-    public function testPostSubscription(){
+    public function testPostSubscription()
+    {
         $result = $this->getUser()->calendars->postSubscription();
         dump($result->toArray());
         $this->assertInstanceOf(Collection::class, $result);

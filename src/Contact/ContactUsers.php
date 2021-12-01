@@ -95,7 +95,7 @@ class ContactUsers extends AbstractAPI
     }
 
     /**
-     * 根据手机号和邮箱获取userId
+     * 根据手机号和邮箱获取userId.
      *
      * @param array $query 查询参数
      * @param array $param 请求体

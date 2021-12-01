@@ -62,7 +62,8 @@ class Schedule extends UserTest
         $this->assertInstanceOf(Collection::class, $result);
     }
 
-    public function testEventsSubscription(){
+    public function testEventsSubscription()
+    {
         $result = $this->getUser()->schedule->EventsSubscription('feishu.cn_L4RCs7X8FbPBJ2SUAfpKxe@group.calendar.feishu.cn');
         dump($result->toArray());
         $this->assertInstanceOf(Collection::class, $result);
@@ -136,32 +137,38 @@ class Schedule extends UserTest
         $this->assertInstanceOf(Collection::class, $result);
     }
 
-    public function testPostCalDav(){
+    public function testPostCalDav()
+    {
         $result = $this->getUser()->schedule->postCalDav(['device_name'=>'test']);
         dump($result->toArray());
         $this->assertInstanceOf(Collection::class, $result);
     }
 
-    public function testPostExchange(){
+    public function testPostExchange()
+    {
         $result = $this->getUser()->schedule->postExchange([
-            'admin_account'=>'test',
-            'exchange_account'=>'test',
-            'user_id'=>'ou_37a83aaf1fae3af69be3b89b15231782'
-        ],['user_id_type'=>'open_id']);
-        dump($result->toArray());exit;
+            'admin_account'   => 'test',
+            'exchange_account'=> 'test',
+            'user_id'         => 'ou_37a83aaf1fae3af69be3b89b15231782',
+        ], ['user_id_type'=>'open_id']);
+        dump($result->toArray());
+        exit;
         $this->assertInstanceOf(Collection::class, $result);
     }
 
-    public function testGetExchange(){
+    public function testGetExchange()
+    {
         $result = $this->getUser()->schedule->getExchange('test');
-        dump($result->toArray());exit;
+        dump($result->toArray());
+        exit;
         $this->assertInstanceOf(Collection::class, $result);
     }
 
-    public function testDelExchange(){
+    public function testDelExchange()
+    {
         $result = $this->getUser()->schedule->delExchange('test');
-        dump($result->toArray());exit;
+        dump($result->toArray());
+        exit;
         $this->assertInstanceOf(Collection::class, $result);
     }
-
 }

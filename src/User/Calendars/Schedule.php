@@ -18,11 +18,10 @@ class Schedule extends AbstractAPI
     const API_POST_EVENTS_ATTENDEES = 'https://open.feishu.cn/open-apis/calendar/v4/calendars/';
     const API_POST_EVENTS_ATTENDEES_DELETE = 'https://open.feishu.cn/open-apis/calendar/v4/calendars/';
     const API_GET_EVENTS_CHAT_MEMBERS = 'https://open.feishu.cn/open-apis/calendar/v4/calendars/';
-    const API_POST_CALDAV_CONF = "https://open.feishu.cn/open-apis/calendar/v4/settings/generate_caldav_conf";
-    const API_POST_EXCHANGE_BINDINGS = "https://open.feishu.cn/open-apis/calendar/v4/exchange_bindings";
-    const API_GET_EXCHANGE_BINDINGS = "https://open.feishu.cn/open-apis/calendar/v4/exchange_bindings/";
-    const API_DELETE_EXCHANGE_BINDINGS = "https://open.feishu.cn/open-apis/calendar/v4/exchange_bindings/";
-
+    const API_POST_CALDAV_CONF = 'https://open.feishu.cn/open-apis/calendar/v4/settings/generate_caldav_conf';
+    const API_POST_EXCHANGE_BINDINGS = 'https://open.feishu.cn/open-apis/calendar/v4/exchange_bindings';
+    const API_GET_EXCHANGE_BINDINGS = 'https://open.feishu.cn/open-apis/calendar/v4/exchange_bindings/';
+    const API_DELETE_EXCHANGE_BINDINGS = 'https://open.feishu.cn/open-apis/calendar/v4/exchange_bindings/';
 
     /**
      * 创建日程.
@@ -108,14 +107,15 @@ class Schedule extends AbstractAPI
     /**
      * 订阅日程变更事件.
      *
-
+     *
      * @param string $calendarId 日历id
      *
      * @return Collection
      */
-    public function eventsSubscription($calendarId){
-        return $this->parseJSON('post',[
-            self::API_POST_EVENTS.$calendarId.'/events/subscription'
+    public function eventsSubscription($calendarId)
+    {
+        return $this->parseJSON('post', [
+            self::API_POST_EVENTS.$calendarId.'/events/subscription',
         ]);
     }
 
@@ -207,64 +207,65 @@ class Schedule extends AbstractAPI
     }
 
     /**
-     * 生成CalDAV配置
+     * 生成CalDAV配置.
      *
      * @param array $param 请求体
      *
      * @return Collection
      */
-    public function postCalDav(array $param){
-        return $this->parseJSON('post',[
+    public function postCalDav(array $param)
+    {
+        return $this->parseJSON('post', [
             self::API_POST_CALDAV_CONF,
-            $param
+            $param,
         ]);
     }
 
     /**
-     * 创建Exchange绑定关系
+     * 创建Exchange绑定关系.
      *
      * @param array $query 查询参数
      * @param array $param 请求体
      *
      * @return Collection
      */
-    public function postExchange(array $param = [], array $query = []){
-        return $this->parseJSON('post',[
+    public function postExchange(array $param = [], array $query = [])
+    {
+        return $this->parseJSON('post', [
             self::API_POST_EXCHANGE_BINDINGS.'?'.http_build_query($query),
-            $param
+            $param,
         ]);
     }
 
     /**
-     * 查询Exchange绑定关系
+     * 查询Exchange绑定关系.
      *
-     * @param array $query 查询参数
+     * @param array  $query      查询参数
      * @param string $exchangeId ExchangeId
      *
      * @return Collection
      */
-    public function getExchange(string $exchangeId, array $query = []){
-        return $this->parseJSON('get',[
+    public function getExchange(string $exchangeId, array $query = [])
+    {
+        return $this->parseJSON('get', [
             self::API_GET_EXCHANGE_BINDINGS.$exchangeId,
-            $query
+            $query,
         ]);
     }
 
-
     /**
-     * 删除Exchange绑定关系
+     * 删除Exchange绑定关系.
      *
-     * @param array $query 查询参数
+     * @param array  $query      查询参数
      * @param string $exchangeId ExchangeId
      *
      * @return Collection
      */
-    public function delExchange(string $exchangeId, array $query = []){
-        return $this->parseJSON('delete',[
+    public function delExchange(string $exchangeId, array $query = [])
+    {
+        return $this->parseJSON('delete', [
             self::API_DELETE_EXCHANGE_BINDINGS.$exchangeId,
-            $query
+            $query,
         ]);
     }
-
-
 }
