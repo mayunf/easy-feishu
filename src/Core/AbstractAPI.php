@@ -16,9 +16,6 @@ use Psr\Http\Message\RequestInterface;
  */
 abstract class AbstractAPI
 {
-    const POST = 'post';
-
-    const GET = 'get';
 
     public $accessToken;
 
@@ -35,7 +32,7 @@ abstract class AbstractAPI
      *
      * @return Http
      */
-    public function getHttp()
+    public function getHttp(): Http
     {
         if (is_null($this->http)) {
             $this->http = new Http();
@@ -47,19 +44,6 @@ abstract class AbstractAPI
         return $this->http;
     }
 
-    /**
-     * Set the http instance.
-     *
-     * @param Http $http
-     *
-     * @return $this
-     */
-    public function setHttp(Http $http)
-    {
-        $this->http = $http;
-
-        return $this;
-    }
 
     /**
      * 注册中间件.
@@ -97,7 +81,7 @@ abstract class AbstractAPI
      *
      * @return \Closure
      */
-    protected function logMiddleware()
+    protected function logMiddleware(): \Closure
     {
         return Middleware::tap(function (RequestInterface $request, $options) {
             Log::debug("Request: {$request->getMethod()} {$request->getUri()} ".json_encode($options));
