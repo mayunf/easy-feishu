@@ -31,7 +31,7 @@ class Admin extends AbstractAPI
     }
 
     /**
-     * 校验管理员.
+     * 获取应用管理员的管理范围.
      *
      * @param array $params 请求体
      *
@@ -106,7 +106,7 @@ class Admin extends AbstractAPI
     }
 
     /**
-     * 更新可用范围.
+     * 查询应用管理员列表.
      *
      * @param array $params 请求体
      *

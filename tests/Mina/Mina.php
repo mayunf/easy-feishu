@@ -9,7 +9,7 @@ class Mina extends TestCase
 {
     public function testCode2Session()
     {
-        $result = $this->getInstance()->mina->code2session('5fc9886bb681a683');
+        $result = $this->getInstance()->mina->code2session('47bb238120d0b917');
         dump($result->toArray());
         $this->assertInstanceOf(Collection::class, $result);
     }
