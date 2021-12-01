@@ -30,8 +30,8 @@ use Symfony\Component\HttpFoundation\Request;
  * @property \EasyFeishu\Authen\Authen           $authen
  * @property \EasyFeishu\User\User               $user
  * @property Config                              $config
- * @property \EasyFeishu\Im\Group               $group
- * @property \EasyFeishu\Meeting\Meetings       $meetings
+ * @property \EasyFeishu\Im\Group                $group
+ * @property \EasyFeishu\Meeting\Meetings        $meetings
  */
 class Application extends Container
 {
@@ -52,7 +52,7 @@ class Application extends Container
         ServiceProviders\AuthenServiceProvider::class,
         ServiceProviders\UserServiceProvider::class,
         ServiceProviders\GroupServiceProvider::class,
-        ServiceProviders\MeetingServiceProvider::class
+        ServiceProviders\MeetingServiceProvider::class,
     ];
 
     public function __construct($config)

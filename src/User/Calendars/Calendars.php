@@ -1,6 +1,5 @@
 <?php
 
-
 namespace EasyFeishu\User\Calendars;
 
 use EasyFeishu\Core\AbstractAPI;
@@ -14,7 +13,7 @@ class Calendars extends AbstractAPI
     const API_POST_CALENDARS_SEARCH = 'https://open.feishu.cn/open-apis/calendar/v4/calendars/search';
     const API_POST_SUBSCRIBE_CALENDARS = 'https://open.feishu.cn/open-apis/calendar/v4/calendars/';
     const API_DELETE_CALENDARS = 'https://open.feishu.cn/open-apis/calendar/v4/calendars/';
-    const API_POST_SUBSCRIPTION = "https://open.feishu.cn/open-apis/calendar/v4/calendars/subscription";
+    const API_POST_SUBSCRIPTION = 'https://open.feishu.cn/open-apis/calendar/v4/calendars/subscription';
 
     /**
      * 创建日历.
@@ -135,14 +134,15 @@ class Calendars extends AbstractAPI
     }
 
     /**
-     * 订阅日历变更事件
+     * 订阅日历变更事件.
      *
      *
      * @return Collection
      */
-    public function postSubscription(){
+    public function postSubscription()
+    {
         return $this->parseJSON('post', [
-            self::API_POST_SUBSCRIPTION
+            self::API_POST_SUBSCRIPTION,
         ]);
     }
 }

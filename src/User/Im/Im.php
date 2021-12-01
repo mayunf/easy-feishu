@@ -3,7 +3,6 @@
 namespace EasyFeishu\User\Im;
 
 use EasyFeishu\Core\AbstractAPI;
-use EasyFeishu\Utils\File;
 use Mayunfeng\Supports\Collection;
 
 class Im extends AbstractAPI
@@ -23,5 +22,4 @@ class Im extends AbstractAPI
             self::API_DELETE_MESSAGES.$messageId,
         ]);
     }
-
 }

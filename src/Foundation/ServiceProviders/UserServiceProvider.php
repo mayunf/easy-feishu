@@ -6,13 +6,13 @@ use EasyFeishu\User\AccessToken;
 use EasyFeishu\User\Authen\Authen;
 use EasyFeishu\User\Calendars\Calendars;
 use EasyFeishu\User\Calendars\Schedule;
-use EasyFeishu\User\Meetings\Reserves;
+use EasyFeishu\User\Im\Group;
+use EasyFeishu\User\Im\Im;
 use EasyFeishu\User\Meetings\Meetings;
+use EasyFeishu\User\Meetings\Reserves;
 use EasyFeishu\User\User;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use EasyFeishu\User\Im\Im;
-use EasyFeishu\User\Im\Group;
 
 class UserServiceProvider implements ServiceProviderInterface
 {
@@ -44,7 +44,6 @@ class UserServiceProvider implements ServiceProviderInterface
         $pimple['user.meetings'] = function ($pimple) {
             return new Meetings($pimple['user.access_token']);
         };
-
 
         $pimple['user'] = function ($pimple) {
             return new User($pimple);
