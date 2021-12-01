@@ -7,13 +7,6 @@ use Mayunfeng\Supports\Collection;
 
 class AuthenTest extends UserTest
 {
-    public function testGetToken()
-    {
-        $new = new Mina();
-        $info = $new->code2session('238b17af44e08d39');
-        dump($info);
-        exit;
-    }
 
     public function testUserInfo()
     {
