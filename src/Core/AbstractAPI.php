@@ -16,7 +16,6 @@ use Psr\Http\Message\RequestInterface;
  */
 abstract class AbstractAPI
 {
-
     public $accessToken;
 
     /** @var Http */
@@ -43,7 +42,6 @@ abstract class AbstractAPI
 
         return $this->http;
     }
-
 
     /**
      * 注册中间件.
