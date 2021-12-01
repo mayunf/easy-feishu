@@ -71,14 +71,14 @@ class ContactUsers extends AbstractAPI
      */
     public function patchUsers(string $userId, array $param, array $query = [])
     {
-        return $this->parseJSON('get', [
+        return $this->parseJSON('patch', [
             self::API_PATCH_USERS.$userId.'?'.http_build_query($query),
             $param,
         ]);
     }
 
     /**
-     * 修改用户部分信息.
+     * 修改用户全部信息.
      *
      * @param string $userId 用户id
      * @param array  $query  查询参数
@@ -95,7 +95,7 @@ class ContactUsers extends AbstractAPI
     }
 
     /**
-     * 修改用户部分信息.
+     * 根据手机号和邮箱获取userId
      *
      * @param array $query 查询参数
      * @param array $param 请求体

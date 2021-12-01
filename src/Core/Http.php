@@ -87,6 +87,9 @@ class Http
 
     public function patch($url, $options = [])
     {
+        if (empty($options)) {
+            return $this->request($url, 'PATCH');
+        }
         return $this->request($url, 'PATCH', ['json' => $options]);
     }
 
@@ -97,7 +100,10 @@ class Http
 
     public function delete($url, $options = [])
     {
-        return $this->request($url, 'DELETE');
+        if (empty($options)) {
+            return $this->request($url, 'DELETE');
+        }
+        return $this->request($url, 'DELETE', ['json' => $options]);
     }
 
     /**方法
