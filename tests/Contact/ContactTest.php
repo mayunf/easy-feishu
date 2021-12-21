@@ -24,6 +24,13 @@ class ContactTest extends TestCase
         $this->assertInstanceOf(Collection::class, $result);
     }
 
+    public function testGetDepartmentsChildren()
+    {
+        $result = $this->getInstance()->contact->getDepartmentsChildren(0);
+        dump($result->toArray());
+        $this->assertInstanceOf(Collection::class, $result);
+    }
+
     public function testGetDepartmentsById()
     {
         $result = $this->getInstance()->contact->getDepartmentsById('od-dd4472cd9b9adfc90abd0dddc9911434');
