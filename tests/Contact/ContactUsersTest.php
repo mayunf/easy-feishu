@@ -29,7 +29,13 @@ class ContactUsersTest extends TestCase
 
     public function testGetUsers()
     {
-        $result = $this->getInstance()->contactUsers->getUsers(['user_id_type'=>'open_id', 'department_id'=>'od-93357125327c4f399413c8819e002294']);
+        $result = $this->getInstance()->contactUsers->getUsers(['user_id_type'=>'open_id', 'department_id'=>'0']);
+        dump($result->toArray());
+        $this->assertInstanceOf(Collection::class, $result);
+    }
+
+    public function testGetUsersChildren(){
+        $result = $this->getInstance()->contactUsers->getUsersChildren(['user_id_type'=>'open_id', 'department_id'=>0]);
         dump($result->toArray());
         $this->assertInstanceOf(Collection::class, $result);
     }
