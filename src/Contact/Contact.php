@@ -28,6 +28,10 @@ class Contact extends AbstractAPI
 
     const API_POST_CONTACT_BATCH_GET_ID = 'https://open.feishu.cn/open-apis/contact/v3/users/batch_get_id';
 
+    const API_GET_DEPARTMENTS_CHILDREN = 'https://open.feishu.cn/open-apis/contact/v3/departments/%s/children';
+
+
+
     /**
      * 创建部门.
      *
@@ -67,12 +71,31 @@ class Contact extends AbstractAPI
      * @param array $params 请求体
      * @param array $query  查询参数
      *
+     * @deprecated
+     * @see getDepartmentsChildren
      * @return Collection
      */
     public function getDepartments(array $params = [], array $query = []): Collection
     {
         return $this->parseJSON('get', [
             self::API_GET_DEPARTMENTS.'?'.http_build_query($query),
+            $params,
+        ]);
+    }
+
+    /**
+     * 获取子部门列表
+     *
+     * @param  string  $departmentId
+     * @param  array  $params  请求体
+     * @param  array  $query  查询参数
+     *
+     * @return Collection
+     */
+    public function getDepartmentsChildren(string $departmentId, array $params = [], array $query = []): Collection
+    {
+        return $this->parseJSON('get', [
+            sprintf(self::API_GET_DEPARTMENTS_CHILDREN,$departmentId).'?'.http_build_query($query),
             $params,
         ]);
     }

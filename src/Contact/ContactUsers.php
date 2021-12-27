@@ -8,6 +8,7 @@ use Mayunfeng\Supports\Collection;
 class ContactUsers extends AbstractAPI
 {
     const API_POST_USERS = 'https://open.feishu.cn/open-apis/contact/v3/users';
+    const API_POST_USERS_CHILDREN = 'https://open.feishu.cn/open-apis/contact/v3/users/find_by_department';
     const API_GET_USERS = 'https://open.feishu.cn/open-apis/contact/v3/users/';
     const API_PATCH_USERS = 'https://open.feishu.cn/open-apis/contact/v3/users/';
     const API_POST_BATCH_GET_ID = 'https://open.feishu.cn/open-apis/contact/v3/users/batch_get_id';
@@ -46,16 +47,29 @@ class ContactUsers extends AbstractAPI
     }
 
     /**
-     * 获取用户列表.
+     * 获取用户列表(已废弃).
      *
      * @param array $query 查询参数
-     *
+     * @deprecated
+     * @see getUsersChildren
      * @return Collection
      */
     public function getUsers(array $query = [])
     {
         return $this->parseJSON('get', [
             self::API_POST_USERS,
+            $query,
+        ]);
+    }
+    /**
+     * 获取用户列表(新).
+     *
+     * @param array $query 查询参数
+     * @return Collection
+     */
+    public function getUsersChildren(array $query = []){
+        return $this->parseJSON('get', [
+            self::API_POST_USERS_CHILDREN,
             $query,
         ]);
     }

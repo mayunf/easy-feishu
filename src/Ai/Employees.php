@@ -21,6 +21,7 @@ class Employees extends AbstractAPI
     {
         return $this->parseJSON('get', [
             self::API_GET_EHR_EMPLOYEES,
+            $params
         ]);
     }
 
