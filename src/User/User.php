@@ -12,6 +12,7 @@ use EasyFeishu\Utils\Traits\PrefixedContainer;
  * @property \EasyFeishu\User\Im\Group            $group
  * @property \EasyFeishu\User\Meetings\Reserves   $reserves
  * @property \EasyFeishu\User\Meetings\Meetings   $meetings
+ * @property \EasyFeishu\User\Drive\Drive         $drive
  */
 class User
 {

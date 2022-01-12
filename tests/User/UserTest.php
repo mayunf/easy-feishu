@@ -14,7 +14,7 @@ class UserTest extends TestCase
     {
         $app = $this->getInstance(); // 获取app
 
-        $app->config->set('user_access_token', 'u-O4fyDVAx1Gjx7HZzUUL5Pc'); // 设置user_access_token
+        $app->config->set('user_access_token', 'u-V7yBNBz3Iux1Ij9VSpOBPb'); // 设置user_access_token
 
         return $app->user;
     }
