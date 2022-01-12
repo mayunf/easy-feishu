@@ -17,8 +17,8 @@ class Drive extends AbstractAPI
     /**
      * 上传文件.
      *
-     * @param string   $path     文件路径
-     * @param  array  $from     额外参数
+     * @param  string  $path  文件路径
+     * @param  array  $from  额外参数
      *
      * @return Collection
      */
@@ -33,16 +33,42 @@ class Drive extends AbstractAPI
 
     /**
      * 分片上传文件（预上传）
-     * @param string   $path     文件路径
-     * @param  array  $from     额外参数
+     * @param  array  $params  参数
      * @return Collection
      */
-    public function uploadPrepare(string $path, array $from): Collection
+    public function uploadPrepare(array $params = []): Collection
+    {
+        return $this->parseJSON('post', [
+            self::API_POST_FILES_UPLOAD_PREPARE,
+            $params,
+        ]);
+    }
+
+    /**
+     * 分片上传文件（上传分片）
+     * @param  string  $path
+     * @param  array  $from
+     * @return Collection
+     */
+    public function uploadPart(string $path, array $from): Collection
     {
         return $this->parseJSON('upload', [
-            self::API_POST_FILES_UPLOAD_PREPARE,
+            self::API_POST_FILES_UPLOAD_PART,
             ['file' => $path],
             $from,
+        ]);
+    }
+
+    /**
+     * 分片上传文件（完成上传）
+     * @param  array  $params  参数
+     * @return Collection
+     */
+    public function uploadFinish(array $params = []): Collection
+    {
+        return $this->parseJSON('post', [
+            self::API_POST_FILES_UPLOAD_FINISH,
+            $params,
         ]);
     }
 
