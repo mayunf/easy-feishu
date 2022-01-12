@@ -32,6 +32,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @property Config                              $config
  * @property \EasyFeishu\Im\Group                $group
  * @property \EasyFeishu\Meeting\Meetings        $meetings
+ * @property \EasyFeishu\Drive\Drive             $drive
  */
 class Application extends Container
 {
@@ -53,6 +54,7 @@ class Application extends Container
         ServiceProviders\UserServiceProvider::class,
         ServiceProviders\GroupServiceProvider::class,
         ServiceProviders\MeetingServiceProvider::class,
+        ServiceProviders\DriveServiceProvider::class,
     ];
 
     public function __construct($config)

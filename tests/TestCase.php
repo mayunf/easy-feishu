@@ -22,6 +22,9 @@ class TestCase extends BaseTestCase
                 'file'  => __DIR__.'/../logs/'.date('Y-m-d').'.log',
                 'level' => 'debug',
             ],
+            'guzzle' => [
+                'timeout' => 100
+            ]
         ]);
 
         return self::$_instance;

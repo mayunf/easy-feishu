@@ -6,6 +6,7 @@ use EasyFeishu\User\AccessToken;
 use EasyFeishu\User\Authen\Authen;
 use EasyFeishu\User\Calendars\Calendars;
 use EasyFeishu\User\Calendars\Schedule;
+use EasyFeishu\User\Drive\Drive;
 use EasyFeishu\User\Im\Group;
 use EasyFeishu\User\Im\Im;
 use EasyFeishu\User\Meetings\Meetings;
@@ -43,6 +44,9 @@ class UserServiceProvider implements ServiceProviderInterface
         };
         $pimple['user.meetings'] = function ($pimple) {
             return new Meetings($pimple['user.access_token']);
+        };
+        $pimple['user.drive'] = function ($pimple) {
+            return new Drive($pimple['user.access_token']);
         };
 
         $pimple['user'] = function ($pimple) {
