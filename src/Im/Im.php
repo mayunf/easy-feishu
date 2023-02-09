@@ -22,6 +22,9 @@ class Im extends AbstractAPI
     const API_POST_EPHEMERAL_SEND = 'https://open.feishu.cn/open-apis/ephemeral/v1/send';
     const API_POST_EPHEMERAL_DELETE = 'https://open.feishu.cn/open-apis/ephemeral/v1/delete';
 
+    const API_POST_MESSAGE_BATCH_SEND = 'https://open.feishu.cn/open-apis/message/v4/batch_send';
+
+
     /**
      * 发送消息.
      *
@@ -335,6 +338,22 @@ class Im extends AbstractAPI
     {
         return $this->parseJSON('post', [
             self::API_POST_EPHEMERAL_DELETE,
+            $params,
+        ]);
+    }
+
+
+    /**
+     * [sendBatchMessage]
+     * 批量发送消息
+     *
+     * @param array $params
+     *
+     * @return Collection
+     */
+    public function sendBatchMessage(array $params){
+        return $this->parseJSON('post', [
+            self::API_POST_MESSAGE_BATCH_SEND,
             $params,
         ]);
     }
